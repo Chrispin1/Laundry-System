@@ -1,0 +1,61 @@
+{% load crispy_forms_tags %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+        <!-- Bootstrap CSS -->
+        <!-- Font Awesome -->
+        <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        rel="stylesheet"
+        />
+        <!-- Google Fonts -->
+        <link
+        href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+        rel="stylesheet"
+        />
+        <!-- MDB -->
+        <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.2.0/mdb.min.css"
+        rel="stylesheet"
+        />
+        <style>
+            body {
+                background-size: cover;
+                background-repeat: no-repeat;
+
+  background-image: url("data:image/jpeg;base64,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");
+}
+</style>
+</head>
+<body>
+    <div class="container mt-4 mb-4">
+        <div class="row mt-4 mb-4">
+            <div class="col-md-3 mt-4 mb-4"></div>
+            <div class="col-md-6 mt-4 mb-4 shadow-lg p-3">
+                <p class="text-center">REGISTER</p>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{form|crispy}}
+                    <button type="submit" class="btn btn-outline-primary btn-lg mt-2">  Register</button>
+                </form>
+            </div>
+            <div class="col-md-3 mt-4 mb-4"></div>
+
+        </div>
+    </div>
+
+
+
+        <!-- MDB -->
+<script
+type="text/javascript"
+src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.2.0/mdb.min.js"
+></script>    
+<!-- kdb 716 A --
+</body>
+</html>
